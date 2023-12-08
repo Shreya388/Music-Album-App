@@ -1,38 +1,68 @@
-.App {
-  text-align: center;
+body{
+  background-color: black !important;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+@font-face {
+  font-family: PoppinsBold;
+  src: url(./font/Poppins-Bold.ttf);
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+@font-face {
+  font-family: PoppinsLight;
+  src: url(./font/Poppins-Light.ttf);
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+.form-group input:focus{
+  outline:0px !important; 
+  box-shadow: none !important;
+}
+
+.topbar{
+  background: rgba(0, 0, 0, 0.527);
+}
+
+.topbar a{
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.header{
+  padding: 16rem 20rem;
+  background-image: url('https://images.pexels.com/photos/3721941/pexels-photo-3721941.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1');
+  background-size: cover;
+  background-position: left;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.header h1{
+  font-family: PoppinsBold !important;
+  text-shadow: 2px white;
+  font-size: 3rem
 }
+
+.header p{
+  font-family: PoppinsLight;
+  font-size: 20px;
+}
+
+.items{
+  background: black !important;
+  color: white !important;
+}
+
+.searchbox{
+  border-radius: 33px 0px 0px 33px !important;
+  padding: 16px 43px !important;
+  text-align: center !important;
+  background-color: white;
+}
+
+.searchbox:focus{
+  outline: none !important;
+}
+
+.header button {
+  border-radius: 0px 33px 33px 0 !important;
+  background-color: red;
+  border: 1px solid red;
+}
+
+
