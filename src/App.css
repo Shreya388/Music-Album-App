@@ -19,6 +19,7 @@ body{
 
 .topbar{
   background: rgba(0, 0, 0, 0.527);
+  
 }
 
 .topbar a{
@@ -26,21 +27,26 @@ body{
 }
 
 .header{
-  padding: 16rem 20rem;
-  background-image: url('https://images.pexels.com/photos/3721941/pexels-photo-3721941.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1');
+  padding: 16rem 0rem;
+  background-image: url('https://images.pexels.com/photos/9419393/pexels-photo-9419393.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1');
   background-size: cover;
   background-position: left;
+}
+
+.header-container{
+  max-width: 75%;
+  margin: auto;
 }
 
 .header h1{
   font-family: PoppinsBold !important;
   text-shadow: 2px white;
-  font-size: 3rem
+  font-size: 2rem
 }
 
 .header p{
   font-family: PoppinsLight;
-  font-size: 20px;
+  font-size: 40px;
 }
 
 .items{
@@ -50,9 +56,19 @@ body{
 
 .searchbox{
   border-radius: 33px 0px 0px 33px !important;
-  padding: 16px 43px !important;
+  padding: 2vh 3vh !important;
   text-align: center !important;
   background-color: white;
+}
+
+.link{
+  padding: auto 20px !important;
+}
+
+.cardBody{
+  background-color: black !important;
+  border: none;
+  box-shadow: none !important;
 }
 
 .searchbox:focus{

@@ -1,6 +1,6 @@
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Container, InputGroup, FormControl, Button, Row, Card, Navbar, Nav } from 'react-bootstrap';
+import { Container, InputGroup, FormControl, Button, Row, Card, Navbar, Nav, Col } from 'react-bootstrap';
 import { useState, useEffect } from 'react';
 
 const CLIENT_ID = "48ae137df32944318d5cefa8cba7131f";
@@ -10,7 +10,6 @@ function App() {
   const [searchInput, setSearchInput] = useState("");
   const [accessToken, setAccessToken] = useState("");
   const [albums, setAlbums] = useState([]);
-  const [caption, setCaption] = useState([""])
 
   useEffect(() => {
     // API Access Token
@@ -74,6 +73,30 @@ function App() {
     }
   }
 
+  // twenty one pilots
+
+  async function twentyone() {
+    try {
+      if (!accessToken) return console.log("Currently, no access token");
+
+      const getResponse = async (url) => await (await fetch(url, { method: 'GET', headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${accessToken}` } })).json();
+
+      const twentyOneData = await getResponse('https://api.spotify.com/v1/search?q=Twenty%20One%20Pilots&type=artist');
+      const twentyID = twentyOneData.artists.items[0]?.id;
+
+      if (!twentyID) return console.log("Twenty one pilots ID not found");
+
+      console.log("Twenty One Pilots ID is " + twentyID);
+
+      const twentyOneAlbumsData = await getResponse(`https://api.spotify.com/v1/artists/${twentyID}/albums?include_groups=album&market=US&limit=50`);
+      setAlbums(twentyOneAlbumsData.items || []);
+
+      console.log(twentyOneAlbumsData);
+    } catch (error) {
+      console.error('There is Error', error);
+    }
+  }
+
   // Search
   async function search() {
     try {
@@ -121,20 +144,23 @@ function App() {
 
   return (
     <div className="App">
-      <Navbar className='topbar fixed-top pt-3 pb-3'>
-        <Container>
-          <Navbar.Brand className='text-white'>LOGO</Navbar.Brand>
-          <Navbar.Toggle aria-controls="basic-navbar-nav" />
-          <Navbar.Collapse id="basic-navbar-nav">
-            <Nav className="me-auto mx-auto">
-              <Nav.Link href="#home">Trending</Nav.Link>
-              <Nav.Link href="#link">Famous</Nav.Link>
-            </Nav>
-          </Navbar.Collapse>
-        </Container>
-      </Navbar>
+       <Navbar className='topbar fixed-top pt-4 pb-4' expand="lg">
+      <Container>
+        <Navbar.Brand className='text-white'>LOGO</Navbar.Brand>
+        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        <Navbar.Collapse id="basic-navbar-nav">
+          <Nav className="me-auto mx-auto">
+            <Nav.Link className='link' href="#home">Trending</Nav.Link>
+            <Nav.Link className='link' href="#link">Famous</Nav.Link>
+            <Nav.Link className='link' href="#home">Old Songs</Nav.Link>
+            <Nav.Link className='link' href="#link">Bollywood</Nav.Link>
+            <Nav.Link className='link' href="#link">New Songs</Nav.Link>
+          </Nav>
+        </Navbar.Collapse>
+      </Container>
+    </Navbar>
       <div className="header text-white text-center">
-        <Container>
+        <div className='header-container'>
           <div className='p-4'>
             <h1>Listen to Your<br /> Favorite Albums</h1>
             <p>Explore Millions of Songs</p>
@@ -159,19 +185,22 @@ function App() {
           </InputGroup>
           <Button onClick={taylor} className='caption'>Taylor Swift</Button>
           <Button onClick={arijit} className='caption'>Arijit Singh</Button>
-        </Container>
+          <Button onClick={twentyone} className='caption'>Twenty One Pilots</Button>
+        </div>
       </div>
       <Container>
-        <Row className="mx-2 mt-4 row row-cols-3">
+        <Row className="mx-2 mt-4 row row-cols-1 row-cols-sm-2 row-cols-md-5">
           {albums.map(album => (
-            <Card key={album.id} className='items mt-4 border-0'>
-              <Card.Img src={album.images[0]?.url || "#"} />
-              <Card.Body>
-                <Card.Title>{album.name}</Card.Title>
-                <p>{album.album_type}</p>
-                <a href={album.external_urls.spotify}>Listen</a>
-              </Card.Body>
-            </Card>
+            <Col key={album.id} className='items mt-4'>
+              <Card className='border-0'>
+                <Card.Img src={album.images[0]?.url || "#"} />
+                <Card.Body className="cardBody text-white border-0">
+                  <Card.Title>{album.name}</Card.Title>
+                  <p>{album.album_type}</p>
+                  <a href={album.external_urls.spotify}>Listen</a>
+                </Card.Body>
+              </Card>
+            </Col>
           ))}
         </Row>
       </Container>
